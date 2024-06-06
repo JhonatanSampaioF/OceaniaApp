@@ -8,10 +8,8 @@ public class Cliente extends _BaseEntity {
     private String cpf;
     private String email;
     private String senha;
-    @JsonbDateFormat("dd/MM/yyyy")
+    @JsonbDateFormat("dd-MM-yyyy")
     private Date dt_nasc;
-    @JsonbDateFormat("yyyy/MM/dd'T'HH:mm:ss")
-
     private Date dt_criacao;
 
     public Cliente() {
