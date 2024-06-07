@@ -26,6 +26,7 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
         "PRECO", "preco",
         "ESTOQUE", "estoque",
         "CATEGORIA", "categoria",
+        "IMAGEM","imagem",
         "DT_CRIACAO", "dt_criacao_prod",
         "FK_LOJA", "fk_loja"
     );
@@ -59,9 +60,10 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
                 var preco = rs.getDouble(TB_COLUMNS.get("PRECO"));
                 var estoque = rs.getInt(TB_COLUMNS.get("ESTOQUE"));
                 var categoria = rs.getString(TB_COLUMNS.get("CATEGORIA"));
+                var imagem = rs.getString(TB_COLUMNS.get("IMAGEM"));
                 var dt_criacao = rs.getDate(TB_COLUMNS.get("DT_CRIACAO"));
                 var fk_loja = rs.getInt(TB_COLUMNS.get("FK_LOJA"));
-                produto = new Produto(_id,nome,desc,preco,estoque,categoria,dt_criacao,fk_loja);
+                produto = new Produto(_id,nome,desc,preco,estoque,categoria,imagem,dt_criacao,fk_loja);
                 LOGGER.info("Produto retornado com sucesso");
             }
         }
@@ -77,7 +79,7 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
         try(
             var conn = getConnection();
             var stmt = conn.prepareStatement(
-                "INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?)"
+                "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s) VALUES (?,?,?,?,?,?,?)"
                     .formatted(
                         TB_NAME,
                         TB_COLUMNS.get("NOME"),
@@ -85,6 +87,7 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
                         TB_COLUMNS.get("PRECO"),
                         TB_COLUMNS.get("ESTOQUE"),
                         TB_COLUMNS.get("CATEGORIA"),
+                        TB_COLUMNS.get("IMAGEM"),
                         TB_COLUMNS.get("FK_LOJA")
                     )
             )
@@ -95,7 +98,8 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
             stmt.setDouble(3, produto.getPreco());
             stmt.setInt(4, produto.getEstoque());
             stmt.setString(5, produto.getCategoria());
-            stmt.setInt(6, produto.getFk_loja());
+            stmt.setString(6, produto.getImagem());
+            stmt.setInt(7, produto.getFk_loja());
             var rs = stmt.executeUpdate();
             if (rs == 1){
                 LOGGER.info("Produto criado com sucesso!");
@@ -124,6 +128,7 @@ public class ProdutoRepositoryOracle extends ConexaoOracle {
                         rs.getDouble(TB_COLUMNS.get("PRECO")),
                         rs.getInt(TB_COLUMNS.get("ESTOQUE")),
                         rs.getString(TB_COLUMNS.get("CATEGORIA")),
+                        rs.getString(TB_COLUMNS.get("IMAGEM")),
                         rs.getDate(TB_COLUMNS.get("DT_CRIACAO")),
                         rs.getInt(TB_COLUMNS.get("FK_LOJA"))
                     )

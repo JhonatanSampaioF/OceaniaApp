@@ -9,19 +9,21 @@ public class Produto extends _BaseEntity {
     private Double preco;
     private int estoque;
     private String categoria;
+    private String imagem;
     private Date dt_criacao_prod;
     private int fk_loja;
 
     public Produto() {
     }
 
-    public Produto(int id, String nm_prod, String desc_prod, Double preco, int estoque, String categoria, Date dt_criacao_prod, int fk_loja) {
+    public Produto(int id, String nm_prod, String desc_prod, Double preco, int estoque, String categoria, String imagem, Date dt_criacao_prod, int fk_loja) {
         super(id);
         this.nm_prod = nm_prod;
         this.desc_prod = desc_prod;
         this.preco = preco;
         this.estoque = estoque;
         this.categoria = categoria;
+        this.imagem = imagem;
         this.dt_criacao_prod = dt_criacao_prod;
         this.fk_loja = fk_loja;
     }
@@ -66,6 +68,14 @@ public class Produto extends _BaseEntity {
         this.categoria = categoria;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
     public Date getDt_criacao_prod() {
         return dt_criacao_prod;
     }
@@ -90,6 +100,7 @@ public class Produto extends _BaseEntity {
             ", preco=" + preco +
             ", estoque=" + estoque +
             ", categoria='" + categoria + '\'' +
+            ", imagem='" + imagem + '\'' +
             ", dt_criacao_prod=" + dt_criacao_prod +
             ", fk_loja=" + fk_loja +
             "} " + super.toString();
